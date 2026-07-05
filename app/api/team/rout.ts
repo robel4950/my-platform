@@ -19,7 +19,7 @@ export async function GET() {
     },
   })
 
-  const level1Ids = level1Users.map(u => u.id)
+  const level1Ids = level1Users.map((u: { id: string }) => u.id)
 
   // Level 2 — referrals of level 1
   const level2Users = level1Ids.length
@@ -34,7 +34,7 @@ export async function GET() {
       })
     : []
 
-  const level2Ids = level2Users.map(u => u.id)
+  const level2Ids = level2Users.map((u: { id: string }) => u.id)
 
   // Level 3 — referrals of level 2
   const level3Users = level2Ids.length

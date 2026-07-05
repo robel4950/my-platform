@@ -16,13 +16,13 @@ export async function GET() {
 
   // Get level 2 referrals
   const level2Users = await prisma.user.findMany({
-    where: { referrerId: { in: level1Users.map((u) => u.id) } },
+    where: { referrerId: { in: level1Users.map((u: { id: string }) => u.id) } },
     include: { vipContracts: { select: { vipLevel: true } } },
   });
 
   // Get level 3 referrals
   const level3Users = await prisma.user.findMany({
-    where: { referrerId: { in: level2Users.map((u) => u.id) } },
+    where: { referrerId: { in: level2Users.map((u: { id: string }) => u.id) } },
     include: { vipContracts: { select: { vipLevel: true } } },
   });
 
