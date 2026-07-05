@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  password     String
+  inviteCode   String   @unique
+  referrerId   String?
+  referrer     User?    @relation("Referrals", fields: [referrerId], references: [id])
+  referrals    User[]   @relation("Referrals")
+  isAdmin      Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  wallet       Wallet?
+  vipContracts VipContract[]
+  transactions Transaction[]
+  commissions  Commission[]  @relation("CommissionReceiver")
+}
+
+model Wallet {
+  id                String   @id @default(cuid())
+  userId            String   @unique
+  user              User     @relation(fields: [userId], references: [id])
+  mainBalance       Float    @default(0)
+  investmentBalance Float    @default(0)
+  referralBalance   Float    @default(0)
+  updatedAt         DateTime @updatedAt
+}
+
+model VipContract {
+  id               String    @id @default(cuid())
+  userId           String
+  user             User      @relation(fields: [userId], references: [id])
+  vipLevel         Int
+  amountPaid       Float
+  dailyIncome      Float
+  totalIncomeLimit Float
+  earnedSoFar      Float     @default(0)
+  startDate        DateTime  @default(now())
+  status           String    @default("pending") // pending | active | expired | rejected
+  reference        String?
+  lastClaimedAt    DateTime?
+}
+
+model Transaction {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  type      String
+  amount    Float
+  status    String   @default("pending")
+  reference String?
+  createdAt DateTime @default(now())
+}
+
+model Commission {
+  id         String   @id @default(cuid())
+  fromUserId String
+  toUserId   String
+  receiver   User     @relation("CommissionReceiver", fields: [toUserId], references: [id])
+  level      Int
+  percentage Float
+  amount     Float
+  createdAt  DateTime @default(now())
+}

@@ -1,0 +1,36 @@
+export const VIP_PLANS = [
+  { level: 1, price: 60, dailyIncome: 3, totalLimit: 90, label: "VIP 1" },
+  { level: 2, price: 180, dailyIncome: 10, totalLimit: 300, label: "VIP 2" },
+  { level: 3, price: 360, dailyIncome: 21, totalLimit: 630, label: "VIP 3" },
+  { level: 4, price: 600, dailyIncome: 36, totalLimit: 1080, label: "VIP 4" },
+  { level: 5, price: 1200, dailyIncome: 75, totalLimit: 2250, label: "VIP 5" },
+  { level: 6, price: 3000, dailyIncome: 195, totalLimit: 5850, label: "VIP 6" },
+  {
+    level: 7,
+    price: 6000,
+    dailyIncome: 400,
+    totalLimit: 12000,
+    label: "VIP 7",
+  },
+  {
+    level: 8,
+    price: 12000,
+    dailyIncome: 820,
+    totalLimit: 24600,
+    label: "VIP 8",
+  },
+  {
+    level: 9,
+    price: 24000,
+    dailyIncome: 1680,
+    totalLimit: 50400,
+    label: "VIP 9",
+  },
+  {
+    level: 10,
+    price: 36300,
+    dailyIncome: 2600,
+    totalLimit: 78000,
+    label: "VIP 10",
+  },
+];
