@@ -23,11 +23,11 @@ export async function GET() {
   const level1 = user.referrals.length;
 
   const level2Users = await prisma.user.findMany({
-    where: { referrerId: { in: user.referrals.map((r) => r.id) } },
+    where: { referrerId: { in: user.referrals.map((r: { id: string }) => r.id) } },
   });
 
   const level3Users = await prisma.user.findMany({
-    where: { referrerId: { in: level2Users.map((r) => r.id) } },
+    where: { referrerId: { in: level2Users.map((r: { id: string }) => r.id) } },
   });
 
   return NextResponse.json({
